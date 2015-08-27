@@ -72,6 +72,14 @@ var parseStrong = function(str) {
   return str;
  }
 
+ var parseBlockQuote = function(str) {
+  var quoteRegExp = /\:\"(.*?)\"\:/
+  var stra = [];
+  while ((stra = quoteRegExp.exec(str)) !== null) {
+    str = str.replace(stra[0], '<blockquote>' + stra[1] + '</blockquote>');
+  }
+  return str;
+ }
 
 var markdown = {
   parse: function (str, strict) {
@@ -84,6 +92,7 @@ var markdown = {
     str = parseHorizontaleLine(str);
     str = parseLink(str);
     str = parseCode(str);
+    str = parseBlockQuote(str);
     return str;
   }
 };
